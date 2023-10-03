@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $product->title = 'Vest';
         $product->description = 'Hoody met rits, voor stafleden en explorers. Logo voor en handjes achter op de rug.';
         $product->price = 29.00;
+        $product->discount = 25.00;
         $product->leiding = true;
         $product->image = 'img/hoody.png';
         $product->save();
@@ -48,7 +49,7 @@ class DatabaseSeeder extends Seeder
         foreach ($sizes as $item)
         {
             $size = new Size();
-            $size->type_id = $type->id;
+            $size->type_id = $type->id; 
             $size->title = $item;
             $size->save();
         }
