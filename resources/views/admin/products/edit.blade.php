@@ -13,12 +13,29 @@
 			<input type="text" id="title" name="title" class="form-control" value="{{ old('title', $product->title) }}">
 		</div>
 		<div class="form-group">
+			<label for="category_id">Categorie</label>
+			<select name="category_id" id="category_id" class="form-control">
+				@foreach($categories as $category)
+				<option value="{{ $category->id }}" @if(old('category_id', $product->category_id) == $category->id) selected @endif>{{ $category->name }}</option>
+				@endforeach
+			</select>
+		</div>
+		<div class="form-group">
 			<label for="price">Prijs</label>
 			<div class="input-group mb-2">
 		        <div class="input-group-prepend">
 		        	<div class="input-group-text">&euro;</div>
 		        </div>
-				<input type="number" min="0" id="price" name="price" class="form-control" value="{{ old('price', $product->price) }}">
+				<input type="number" min="0" id="price" name="price" class="form-control" value="{{ old('price', $product->getRawOriginal('price')) }}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="discount">Korting</label>
+			<div class="input-group mb-2">
+		        <div class="input-group-prepend">
+		        	<div class="input-group-text">&percnt;</div>
+		        </div>
+				<input type="number" min="0" id="discount" name="discount" class="form-control" value="{{ old('discount', $product->discount) }}">
 			</div>
 		</div>
 		<div class="form-group my-4">

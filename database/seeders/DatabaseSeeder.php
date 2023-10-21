@@ -5,6 +5,7 @@ use App\Models\Product;
 use App\Models\Type;
 use App\Models\Size;
 use App\Models\User;
+use App\Models\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,6 +25,16 @@ class DatabaseSeeder extends Seeder
 
         /////////////////////////////////
 
+        $category_kleding = new Category();
+        $category_kleding->name = "Kleding";
+        $category_kleding->save();
+
+        $category_overige = new Category();
+        $category_overige->name = "Overige";
+        $category_overige->save();
+
+        /////////////////////////////////
+
         $product = new Product();
         $product->title = 'Vest';
         $product->description = 'Hoody met rits, voor stafleden en explorers. Logo voor en handjes achter op de rug.';
@@ -31,6 +42,7 @@ class DatabaseSeeder extends Seeder
         $product->discount = 25.00;
         $product->leiding = true;
         $product->image = 'img/hoody.png';
+        $product->category_id = $category_kleding->id;
         $product->save();
         $product->refresh();
         if(array_key_exists('discount', $product->getAttributes()))
@@ -77,6 +89,7 @@ class DatabaseSeeder extends Seeder
         $product->price = 22.00;
         $product->leiding = true;
         $product->image = 'img/polo.png';
+        $product->category_id = $category_kleding->id;
         $product->save();
 
         $type = new Type();
@@ -117,6 +130,7 @@ class DatabaseSeeder extends Seeder
         $product->price = 7.50;
         $product->leiding = false;
         $product->image = 'img/jeugd.jpg';
+        $product->category_id = $category_kleding->id;
         $product->save();
 
         $type = new Type();
@@ -157,6 +171,7 @@ class DatabaseSeeder extends Seeder
         $product->price = 16.00;
         $product->leiding = true;
         $product->image = 'img/staf.jpg';
+        $product->category_id = $category_kleding->id;
         $product->save();
 
         $type = new Type();
@@ -212,6 +227,7 @@ class DatabaseSeeder extends Seeder
         $product->price = 1.00;
         $product->leiding = false;
         $product->image = 'img/keycords.jpg';
+        $product->category_id = $category_overige->id;
         $product->save();
 
         $type = new Type();

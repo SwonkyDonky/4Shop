@@ -122,6 +122,11 @@ span.collapsing{
 	color: white !important;
 }
 
+.yesur{
+	display: flex;
+	justify-content: space-between;
+}
+
 @media (max-width: 576px) {
 	h1{
 		font-size: 8vw;

@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/winkel');
 Route::get('/winkel', [ProductController::class, 'index'])->name('shop');
 
+Route::get('/categories/{category}', [ProductController::class, 'category'])->name('shop.category');
+
 Route::get('/winkel/mandje', [OrderController::class, 'cart'])->name('cart');
 Route::get('/winkel/mandje/verwijder/{key}', [OrderController::class, 'remove'])->name('cart.remove');
 Route::get('/winkel/bestellen', [OrderController::class, 'order'])->name('order');
@@ -37,7 +39,6 @@ Route::get('/bestelling/{order}/{slug}/cancel', [OrderController::class, 'cancel
 Route::get('/ideal/pay/{order}', [IdealController::class, 'redirect'])->name('ideal.pay');
 Route::get('/ideal/finish/{order}', [IdealController::class, 'finish'])->name('ideal.finish');
 Route::get('/ideal/webhook/{order}', [IdealController::class, 'webhook']);
-
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
 
@@ -54,6 +55,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function () {
     Route::post('orders/mail', [AdminOrderController::class, 'mail_send'])->name('admin.orders.mail.send');
     Route::get('orders/packing', [AdminOrderController::class, 'packing'])->name('admin.orders.packing');
     Route::resource('orders', AdminOrderController::class, ['as' => 'admin'])->only(['index', 'show', 'destroy']);
+
+    Route::get('orders/{order}/toggle', [OrderController::class, 'toggle'])->name('admin.orders.toggle');
+
+    Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class, ['as' => 'admin'])->except('show');
 
 });
 
